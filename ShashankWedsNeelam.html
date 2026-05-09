@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shashank ❤️ Neelam Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {margin:0;font-family:Poppins;background:#fffaf5;color:#333;overflow-x:hidden;}
+h1,h2,h3{text-align:center;font-family:'Playfair Display';}
+
+/* PRELOADER */
+#preloader{
+position:fixed;width:100%;height:100%;background:black;color:gold;
+display:flex;justify-content:center;align-items:center;z-index:10000;
+}
+.loader-text{font-size:28px;letter-spacing:4px;animation:glow 2s infinite alternate;}
+@keyframes glow{from{opacity:.5;}to{opacity:1;}}
+
+/* ENTRY */
+#entryScreen{
+position:fixed;width:100%;height:100%;
+background:linear-gradient(135deg,#1a1a1a,#3b2f2f);
+color:white;display:flex;justify-content:center;align-items:center;
+z-index:9999;flex-direction:column;
+}
+.gold-text{
+font-size:34px;
+background:linear-gradient(90deg,#d4af37,#fff5cc,#d4af37);
+background-size:200% auto;
+color:transparent;
+-webkit-background-clip:text;
+animation:shine 3s linear infinite;
+}
+@keyframes shine{to{background-position:200% center;}}
+
+#entryScreen button{
+margin-top:20px;padding:12px 25px;border:none;
+background:#b48a5a;color:white;border-radius:30px;
+}
+
+/* PARTICLES */
+canvas{position:absolute;width:100%;height:100%;top:0;left:0;z-index:1;}
+
+/* HERO */
+.hero{
+height:100vh;
+background:url('https://images.unsplash.com/photo-1519741497674-611481863552') center/cover fixed;
+color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;
+}
+
+/* COUNTDOWN */
+.countdown{display:flex;gap:10px;margin-top:15px;}
+.box{background:rgba(255,255,255,0.2);padding:10px;border-radius:10px;}
+
+/* CARDS */
+.card{
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(10px);
+border-radius:16px;padding:20px;margin:15px;
+box-shadow:0 8px 30px rgba(0,0,0,0.1);
+}
+
+/* SLIDER */
+.slider{overflow:hidden;border-radius:12px;}
+.slides{display:flex;transition:.5s;}
+.slides img{width:100%;height:250px;object-fit:cover;}
+.dots span{height:8px;width:8px;background:#ccc;margin:5px;display:inline-block;border-radius:50%;}
+.dots .active{background:#b48a5a;}
+
+/* MAP */
+iframe{width:100%;height:250px;border:none;border-radius:12px;}
+
+/* BUTTON */
+.btn{background:#b48a5a;color:white;padding:10px 15px;border:none;border-radius:8px;}
+
+/* MUSIC BTN */
+.music-btn{
+position:fixed;bottom:20px;right:20px;background:#b48a5a;
+color:white;padding:12px;border-radius:50%;
+}
+
+/* SCROLL */
+.reveal{opacity:0;transform:translateY(60px);transition:1s;}
+.reveal.active{opacity:1;transform:translateY(0);}
+
+footer{background:#b48a5a;color:white;padding:20px;text-align:center;}
+</style>
+</head>
+
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader"><div class="loader-text">Shashank & Neelam</div></div>
+
+<!-- ENTRY -->
+<div id="entryScreen">
+<canvas id="luxParticles"></canvas>
+<h1 id="animatedNames" class="gold-text"></h1>
+<p>08 · 07 · 2026</p>
+<button onclick="enterSite()">Open Invitation</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=indian-piano-ambient-110624.mp3">
+</audio>
+
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
+
+<!-- HERO -->
+<section class="hero">
+<h1>Shashank ❤️ Neelam</h1>
+<p>8 July 2026 · Muhurat 7:11 PM</p>
+
+<div class="countdown">
+<div class="box"><span id="d"></span><br>Days</div>
+<div class="box"><span id="h"></span><br>Hrs</div>
+<div class="box"><span id="m"></span><br>Min</div>
+<div class="box"><span id="s"></span><br>Sec</div>
+</div>
+</section>
+
+<!-- EVENTS -->
+<section class="reveal">
+<h2>Celebrations</h2>
+<div class="card">Haldi & Mehendi · 6 July</div>
+<div class="card">Sangeet · 7 July</div>
+<div class="card">Wedding · 8 July</div>
+<div class="card">Reception · 9 July</div>
+</section>
+
+<!-- SLIDER -->
+<section class="reveal">
+<h2>Moments</h2>
+<div class="slider">
+<div class="slides">
+<img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+<img src="https://images.unsplash.com/photo-1529636798458-92182e662485">
+<img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92">
+</div>
+</div>
+<div class="dots">
+<span onclick="goToSlide(0)"></span>
+<span onclick="goToSlide(1)"></span>
+<span onclick="goToSlide(2)"></span>
+</div>
+</section>
+
+<!-- VENUE -->
+<section class="reveal">
+<h2>Venue</h2>
+<p>Maa Falaudi Resort, Kherabad</p>
+<iframe src="https://maps.google.com/maps?q=Maa%20Falaudi%20Resort&t=&z=13&output=embed"></iframe>
+</section>
+
+<!-- RSVP -->
+<section class="reveal">
+<h2>RSVP</h2>
+<div class="card">
+<input id="name" placeholder="Your Name"><br><br>
+<select id="event">
+<option>All Events</option>
+<option>Wedding Only</option>
+</select><br><br>
+<select id="guests">
+<option>1</option><option>2</option>
+</select><br><br>
+<button class="btn" onclick="sendWhatsApp()">Send RSVP</button>
+</div>
+</section>
+
+<footer>Shashank & Neelam · शुभ विवाह</footer>
+
+<script>
+// PRELOADER
+window.onload=()=>{
+setTimeout(()=>{document.getElementById("preloader").style.display="none";},2000);
+typeEffect();
+};
+
+// TYPE
+let text="Shashank & Neelam",i=0;
+function typeEffect(){
+if(i<text.length){
+document.getElementById("animatedNames").innerHTML+=text[i];
+i++;setTimeout(typeEffect,100);
+}
+}
+
+// ENTER
+function enterSite(){
+document.getElementById("entryScreen").style.display="none";
+let music=document.getElementById("music");
+music.volume=0;music.play();
+let vol=0;
+let fade=setInterval(()=>{
+if(vol<0.3){vol+=0.02;music.volume=vol;}
+else clearInterval(fade);
+},200);
+}
+
+// PARTICLES
+let c=document.getElementById("luxParticles"),ctx=c.getContext("2d");
+c.width=window.innerWidth;c.height=window.innerHeight;
+let p=[];
+for(let i=0;i<80;i++){
+p.push({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*2});
+}
+function draw(){
+ctx.clearRect(0,0,c.width,c.height);
+p.forEach(e=>{
+ctx.fillStyle="rgba(255,215,150,.8)";
+ctx.beginPath();ctx.arc(e.x,e.y,e.s,0,Math.PI*2);ctx.fill();
+e.y-=0.5;if(e.y<0)e.y=c.height;
+});
+requestAnimationFrame(draw);
+}
+draw();
+
+// COUNTDOWN
+let date=new Date("July 8 2026 19:11:00").getTime();
+setInterval(()=>{
+let now=new Date().getTime(),gap=date-now;
+d.innerText=Math.floor(gap/86400000);
+h.innerText=Math.floor(gap/3600000)%24;
+m.innerText=Math.floor(gap/60000)%60;
+s.innerText=Math.floor(gap/1000)%60;
+},1000);
+
+// SCROLL
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".reveal").forEach(el=>{
+if(el.getBoundingClientRect().top<window.innerHeight-100){
+el.classList.add("active");
+}
+});
+});
+
+// SLIDER
+let idx=0,slides=document.querySelector(".slides");
+function goToSlide(i){idx=i;slides.style.transform=`translateX(-${i*100}%)`;}
+setInterval(()=>{idx=(idx+1)%3;goToSlide(idx);},3000);
+
+// WHATSAPP
+function sendWhatsApp(){
+let name=document.getElementById("name").value;
+let msg=`Hi, I am ${name}. I will attend the wedding 🎉`;
+window.open(`https://wa.me/919810000001?text=${encodeURIComponent(msg)}`);
+}
+
+// MUSIC TOGGLE
+function toggleMusic(){
+let m=document.getElementById("music");
+m.paused?m.play():m.pause();
+}
+</script>
+
+</body>
+</html>
